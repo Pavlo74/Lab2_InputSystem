@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
     }
 
     
@@ -32,11 +33,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnJump(InputValue value)
     {
-        
-
+        if (!capsuleCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) return;
         if (value.isPressed)
         {
-            
             rb.velocity += new Vector2(0f, jumpHeight);
         }
     }
